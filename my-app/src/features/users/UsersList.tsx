@@ -6,18 +6,20 @@ import {Users} from "./type"
 
 function UsersList() {
   const [users, setUsers] = useState<Users[]>([]);
+  const [loading, setLoading]=useState<boolean>(true)
 
   useEffect(()=>{
     axios.get<Users[]>("https://jsonplaceholder.typicode.com/users")
     .then(res =>{
       setUsers(res.data);
+      setLoading(false);
     })
     .catch(er=>{
       console.error('Ошибка при загрузке:', er);
     })
   },[]);
 
-  return (
+  return loading?<div>Загрузка</div>: (
     <div>
       {users.map((user)=>(
         <Link to={`/user/${user.id}`}>

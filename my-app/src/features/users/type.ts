@@ -26,7 +26,7 @@ export type User = {
     company: Company;
 };
 
-export type Post={
+export type Posts={
     userId:number;
     id:number;
     title:string;
