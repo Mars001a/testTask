@@ -1,11 +1,14 @@
-import { UsersList } from "../type";
+import { Props } from "../type";
 import { useNavigate } from "react-router-dom";
 
-function Table({ users }: UsersList) {
+function Table({ users, search}: Props) {
   const navigate = useNavigate();
+  const filteredUsers = search.trim() === ""?users:users.filter((user)=>(
+    user.username.toLowerCase().includes(search.toLowerCase())
+  ))
   return (
-    <div className="border rounded-xl overflow-hidden">
-      <table className="w-full bg-slate-800 divide-y divide-">
+    <div className="border md:rounded-xl overflow-x-scroll">
+      <table className="w-full bg-slate-800 divide-y">
         <thead>
           <tr className="divide-x divide-gray-600 bg-slate-700 text-white">
             <th className="px-3 py-3">Username</th>
@@ -13,8 +16,8 @@ function Table({ users }: UsersList) {
             <th className="px-3">City</th>
           </tr>
         </thead>
-        <tbody className="divide-y divide-gray-600">
-          {users.map((user) => (
+        <tbody className="divide-y divide-gray-600 ">
+          {filteredUsers.map((user) => (
             <tr
               key={user.id}
               className="divide-x divide-gray-600 hover:bg-slate-500 cursor-pointer"

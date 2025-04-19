@@ -1,11 +1,14 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import {Users} from "./type"
-import Table from "./componetns/Table"
 import Loader from "./componetns/Loader";
+import Search from "./componetns/Search";
+import ApiError from "./componetns/apiError";
+
 
 
 function UsersList() {
+  const [apiError, setApiError]=useState<boolean>(false);
   const [users, setUsers] = useState<Users[]>([]);
   const [loading, setLoading]=useState<boolean>(true)
 
@@ -13,16 +16,17 @@ function UsersList() {
     axios.get<Users[]>("https://jsonplaceholder.typicode.com/users")
     .then(res =>{
       setUsers(res.data);
+    }).catch(()=>{
+      setApiError(true);
+    }).
+    finally(()=>{
       setLoading(false);
-    })
-    .catch(er=>{
-      console.error('Ошибка при загрузке:', er);
     })
   },[]);
 
   return loading?<Loader/>: (
     <>
-      <Table users={users}/>
+      {apiError?<ApiError/>:<Search users={users}/>}
     </>
   );
 }

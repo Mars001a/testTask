@@ -46,3 +46,7 @@ export type UserInfo={
     user:User;
 }
 
+export type Props={
+    users:Users[];
+    search:string;
+}

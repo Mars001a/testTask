@@ -5,7 +5,7 @@ import UserDetailPage from './features/users/UserDetailPage';
 
 function App() {
   return (
-    <div className="p-10 text-gray-400">
+    <div className="py-5 md:p-10 text-gray-400">
       <Routes>
         <Route path='/' element={<Navigate to="user"/>} />
         <Route path='/user' element={<UsersList/>} />
