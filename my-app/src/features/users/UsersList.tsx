@@ -1,7 +1,8 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
-import { Link } from 'react-router-dom';
+import { useEffect, useState } from "react";
 import {Users} from "./type"
+import Table from "./componetns/Table"
+import Loader from "./componetns/Loader";
 
 
 function UsersList() {
@@ -19,16 +20,10 @@ function UsersList() {
     })
   },[]);
 
-  return loading?<div>Загрузка</div>: (
-    <div>
-      {users.map((user)=>(
-        <Link to={`/user/${user.id}`}>
-          <div key={user.id}>
-            <p>{user.username}</p>
-          </div>
-        </Link>
-      ))}
-    </div>
+  return loading?<Loader/>: (
+    <>
+      <Table users={users}/>
+    </>
   );
 }
 

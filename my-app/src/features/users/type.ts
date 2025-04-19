@@ -22,6 +22,7 @@ export type User = {
     id: number;
     name: string;
     email: string;
+    phone: string;
     address: Address;
     company: Company;
 };
@@ -32,3 +33,16 @@ export type Posts={
     title:string;
     body:string;
 }
+
+export type PostsList={
+    posts:Posts[];
+}
+
+export type UsersList={
+    users:Users[];
+}
+
+export type UserInfo={
+    user:User;
+}
+
